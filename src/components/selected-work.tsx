@@ -50,15 +50,18 @@ function ViewAllCTA({
   className?: string;
   prominent?: boolean;
 }) {
+  // Always-on base classes — `inline-flex` keeps the pill on one line and
+  // `whitespace-nowrap` is the belt-and-braces guard against narrow mobile
+  // viewports breaking "View all work" + arrow onto two lines.
+  const base =
+    "group inline-flex items-center gap-2 whitespace-nowrap rounded-pill backdrop-blur-md transition-all duration-300 ease-out-expo";
+
+  const variant = prominent
+    ? "border border-accent/45 bg-accent/[0.08] px-7 py-3.5 text-base font-semibold text-fg hover:-translate-y-0.5 hover:border-accent/80 hover:bg-accent/[0.16] hover:shadow-accent-glow"
+    : "border border-fg/15 bg-fg/[0.03] px-4 py-2 text-sm text-fg/85 hover:-translate-y-0.5 hover:border-accent/35 hover:text-fg";
+
   return (
-    <Link
-      href="/work"
-      className={
-        prominent
-          ? `group ${className} items-center gap-2 rounded-pill border border-accent/45 bg-accent/[0.08] px-7 py-3.5 text-base font-semibold text-fg backdrop-blur-md transition-all duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-accent/80 hover:bg-accent/[0.16] hover:shadow-accent-glow`
-          : `group ${className} items-center gap-2 rounded-pill border border-fg/15 bg-fg/[0.03] px-4 py-2 text-sm text-fg/85 backdrop-blur-md transition-all duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-accent/35 hover:text-fg`
-      }
-    >
+    <Link href="/work" className={`${base} ${variant} ${className}`.trim()}>
       View all work
       <ArrowRight
         size={prominent ? 16 : 14}
