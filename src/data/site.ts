@@ -26,7 +26,7 @@ export const site = {
   /* ──── About copy ──── */
   about: {
     body: [
-      "Computer Science & Design (Hons.) graduate from FLAME University. I work across the seam between research, engineering, and visual design — disciplines most courses keep separate, and that I'm convinced are one thing.",
+      "Computer Science & Design (Hons.) graduate from FLAME University. I work across the seam between research, engineering, and visual design. Disciplines most courses keep separate, and that I'm convinced are one thing.",
       "I care about the parts most portfolios skip: the audit behind a design choice, the build pipeline behind a demo, the iteration that came before the version worth showing.",
     ],
     chips: ["Design Engineering", "HCI", "UI / UX", "Unity · AR / VR", "Generative AI"],

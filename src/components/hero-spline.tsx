@@ -22,7 +22,7 @@ export function HeroSpline() {
     if (!canvas || !wrap) return;
 
     // Skip the heavy Spline runtime on:
-    //   • mobile / tablet (< 1024px) — runtime is slow on touch devices
+    //   • mobile / tablet (< 1024px), runtime is slow on touch devices
     //     and the layout doesn't include the canvas anyway
     //   • prefers-reduced-motion users (a11y)
     if (typeof window !== "undefined") {

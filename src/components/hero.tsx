@@ -34,7 +34,7 @@ export function Hero() {
    * canvas. Spline's runtime listens to `pointermove` (not `mousemove`),
    * so we synthesise pointer events on the canvas using the original
    * viewport coords. That lets the robot's eyes track the cursor across
-   * the WHOLE hero — including over the text column on the left.
+   * the WHOLE hero, including over the text column on the left.
    */
   useEffect(() => {
     const section = sectionRef.current;
@@ -57,7 +57,7 @@ export function Hero() {
           })
         );
       } catch {
-        // Older browsers without PointerEvent constructor — fall through
+        // Older browsers without PointerEvent constructor, fall through
       }
     };
 
@@ -72,7 +72,7 @@ export function Hero() {
       aria-label="Introduction"
       className="relative isolate min-h-[100svh] overflow-hidden"
     >
-      {/* Spline canvas — desktop only.
+      {/* Spline canvas, desktop only.
           Hidden on mobile entirely: the runtime is heavy, mobile devices
           struggle, and the text-only mobile layout reads better. The
           `hidden lg:block` keeps the DOM out of the mobile tree, and
@@ -85,7 +85,7 @@ export function Hero() {
         <HeroSpline />
       </div>
 
-      {/* Text column — vertically centered in the hero, horizontally centered
+      {/* Text column, vertically centered in the hero, horizontally centered
           within its own container so it doesn't feel hard-pinned to the left
           edge. Sits in the left ~38% on desktop, full-width above the robot
           on mobile. */}
@@ -115,7 +115,7 @@ export function Hero() {
             </Pill>
           </motion.div>
 
-          {/* Headline — two-tier hierarchy:
+          {/* Headline, two-tier hierarchy:
               • intro line (smaller, lighter): "Hi, I'm Aryan Patney."
               • statement (huge, extrabold): "I build sh*t that just works." */}
           <motion.h1
@@ -165,7 +165,7 @@ function Pill({ children }: { children: React.ReactNode }) {
 
 /**
  * The discipline pill is intentionally larger + more present than the status
- * pill — it's the substantive claim about *what* I do, not chrome.
+ * pill, it's the substantive claim about *what* I do, not chrome.
  */
 function DisciplinePill({ items }: { items: string[] }) {
   return (

@@ -15,7 +15,7 @@ export function SelectedWork() {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             title="Work."
-            description="A selection below — the full archive lives on the work page."
+            description="A selection below, the full archive lives on the work page."
             className="md:max-w-[58ch]"
           />
           <ViewAllCTA className="hidden md:inline-flex" />
@@ -38,8 +38,8 @@ export function SelectedWork() {
  * The "View all work" call-to-action.
  *
  * Two visual modes:
- *  • default   — used at the top-right of the section header
- *  • prominent — used below the grid; bigger, accent-bordered, violet
+ *  • default  , used at the top-right of the section header
+ *  • prominent, used below the grid; bigger, accent-bordered, violet
  *                glow on hover. The bigger one is what the user actually
  *                completes their scroll on, so it earns the weight.
  */
@@ -50,7 +50,7 @@ function ViewAllCTA({
   className?: string;
   prominent?: boolean;
 }) {
-  // Always-on base classes — `inline-flex` keeps the pill on one line and
+  // Always-on base classes, `inline-flex` keeps the pill on one line and
   // `whitespace-nowrap` is the belt-and-braces guard against narrow mobile
   // viewports breaking "View all work" + arrow onto two lines.
   const base =

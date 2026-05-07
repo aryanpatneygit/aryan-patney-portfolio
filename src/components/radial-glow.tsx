@@ -49,7 +49,7 @@ function Blob({
  * that follows the cursor with damped lag for a subtle parallax.
  *
  * Mobile / coarse-pointer devices skip the cursor-following halo (the rAF
- * loop and pointermove tracking are wasted there — touch fires few events
+ * loop and pointermove tracking are wasted there, touch fires few events
  * and there's no hover state to reward).
  */
 export function RadialGlow() {
@@ -60,7 +60,7 @@ export function RadialGlow() {
     const halo = haloRef.current;
     if (!halo) return;
 
-    // Bail on coarse pointer devices (touch) — no value, real cost.
+    // Bail on coarse pointer devices (touch), no value, real cost.
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     if (isCoarse) return;
 
@@ -95,7 +95,7 @@ export function RadialGlow() {
       aria-hidden
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
-      {/* Violet — top-left, hero anchor */}
+      {/* Violet, top-left, hero anchor */}
       <Blob
         position={{ top: "-25%", left: "-20%" }}
         size="120vh"
@@ -104,7 +104,7 @@ export function RadialGlow() {
         glowMax={1}
         drift="a"
       />
-      {/* Blue — upper right */}
+      {/* Blue, upper right */}
       <Blob
         position={{ top: "-12%", right: "-22%" }}
         size="105vh"
@@ -114,7 +114,7 @@ export function RadialGlow() {
         glowMax={0.95}
         drift="b"
       />
-      {/* Pink — bottom-left */}
+      {/* Pink, bottom-left */}
       <Blob
         position={{ bottom: "-25%", left: "-10%" }}
         size="95vh"
@@ -124,7 +124,7 @@ export function RadialGlow() {
         glowMax={0.85}
         drift="c"
       />
-      {/* Teal — bottom-right */}
+      {/* Teal, bottom-right */}
       <Blob
         position={{ bottom: "-22%", right: "-12%" }}
         size="85vh"
@@ -136,7 +136,7 @@ export function RadialGlow() {
         drift="a"
       />
 
-      {/* Central violet halo — follows the cursor with damping. */}
+      {/* Central violet halo, follows the cursor with damping. */}
       <div
         ref={haloRef}
         className="absolute inset-0 will-change-transform"

@@ -57,7 +57,7 @@ export function Navbar() {
         ))}
       </motion.nav>
 
-      {/* Mobile — single small glass button on the right */}
+      {/* Mobile, single small glass button on the right */}
       <div className="pointer-events-auto ml-auto md:hidden">
         <button
           type="button"
@@ -129,7 +129,7 @@ function BrandMark({
   return (
     <Link
       href="/"
-      aria-label="Aryan Patney — home"
+      aria-label="Home"
       className="group inline-flex items-center gap-2 rounded-pill px-3 py-1.5"
     >
       <span className="relative inline-flex h-1.5 w-1.5">

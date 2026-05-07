@@ -87,7 +87,7 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
           rect.top < window.innerHeight * 0.88 && rect.bottom > 0;
         if (alreadyVisible) return;
 
-        // "Fly in" — bigger y offset, slight per-item rotation, longer
+        // "Fly in", bigger y offset, slight per-item rotation, longer
         // duration with expo ease, alternating x for a gentle parallax.
         const variant = group.dataset.staggerVariant ?? "default";
         const flyIn = variant === "fly";

@@ -19,7 +19,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const project = projects.find((p) => p.slug === params.slug);
   if (!project) return { title: "Not found" };
   return {
-    title: `${project.title} — Aryan Patney`,
+    title: `${project.title} · Aryan Patney`,
     description: project.blurb,
   };
 }
@@ -125,7 +125,7 @@ export default function CaseStudyPage({ params }: PageProps) {
           ) : null}
         </div>
 
-        {/* Hero — video takes priority over thumbnail when both exist.
+        {/* Hero, video takes priority over thumbnail when both exist.
             Autoplays muted (browsers require it); user can unmute via the
             small glass toggle in the lower-right of the player. */}
         {cs?.heroVideo ? (
@@ -137,7 +137,7 @@ export default function CaseStudyPage({ params }: PageProps) {
             <CaseStudyVideo
               src={cs.heroVideo}
               poster={project.thumbnail}
-              alt={`${project.title} — video`}
+              alt={`Video preview for ${project.title}`}
             />
           </div>
         ) : project.thumbnail ? (
@@ -148,7 +148,7 @@ export default function CaseStudyPage({ params }: PageProps) {
           >
             <Image
               src={project.thumbnail}
-              alt={`${project.title} — cover`}
+              alt={`Cover image for ${project.title}`}
               fill
               priority
               sizes="(min-width: 1024px) 1200px, 100vw"
@@ -319,7 +319,7 @@ function ProcessSection({
  * Consistent image frame for every case study image. Layout-driven:
  * - "screen": portrait phone mockup, 9:16 aspect, tight padding so the
  *   mockup fills the frame inside a 3-column grid.
- * - "tall":   3:4 aspect inside a single column — used for one-off portraits.
+ * - "tall":   3:4 aspect inside a single column, used for one-off portraits.
  * - "wide":   spans the whole row at 16:10.
  * - default:  16:10 with object-contain padding for landscape demos.
  */

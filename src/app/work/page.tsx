@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { WorkGrid } from "@/components/work-grid";
 
 export const metadata: Metadata = {
-  title: "Work — Aryan Patney",
+  title: "Work · Aryan Patney",
   description:
     "Selected projects spanning design engineering, HCI research, and product design.",
 };
@@ -29,7 +29,7 @@ export default function WorkPage() {
 
         <SectionHeading
           title="All work."
-          description="Projects across code, research, and design — filter by lens."
+          description="Projects across code, research, and design, filter by lens."
         />
 
         <div className="mt-12">

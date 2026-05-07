@@ -26,7 +26,7 @@ export function ProjectCard({ project, index }: Props) {
   const reduce = useReducedMotion();
   const gradient = hintToGradient[project.hint ?? "neutral"];
 
-  // Comet Card's defaults are dramatic — dial them down for a card grid.
+  // Comet Card's defaults are dramatic, dial them down for a card grid.
   // No tilt at all if the user prefers reduced motion.
   const cometProps = reduce
     ? { rotateDepth: 0, translateDepth: 0 }
