@@ -21,14 +21,19 @@ export function HeroSpline() {
     const wrap = wrapRef.current;
     if (!canvas || !wrap) return;
 
-    // Respect reduced-motion preferences — skip the WebGL load entirely
-    // on devices / users who'd rather opt out of intensive animation.
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
-      setStatus("error");
-      return;
+    // Skip the heavy Spline runtime on:
+    //   • mobile / tablet (< 1024px) — runtime is slow on touch devices
+    //     and the layout doesn't include the canvas anyway
+    //   • prefers-reduced-motion users (a11y)
+    if (typeof window !== "undefined") {
+      const isBelowDesktop = window.innerWidth < 1024;
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (isBelowDesktop || prefersReduced) {
+        setStatus("error");
+        return;
+      }
     }
 
     let cancelled = false;

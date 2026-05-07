@@ -47,6 +47,10 @@ function Blob({
  * The radial-glow background. Five fixed blurred blobs in violet / blue /
  * pink / teal that breathe + drift, plus a mouse-reactive central halo
  * that follows the cursor with damped lag for a subtle parallax.
+ *
+ * Mobile / coarse-pointer devices skip the cursor-following halo (the rAF
+ * loop and pointermove tracking are wasted there — touch fires few events
+ * and there's no hover state to reward).
  */
 export function RadialGlow() {
   const haloRef = useRef<HTMLDivElement>(null);
@@ -56,6 +60,10 @@ export function RadialGlow() {
     const halo = haloRef.current;
     if (!halo) return;
 
+    // Bail on coarse pointer devices (touch) — no value, real cost.
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches;
+    if (isCoarse) return;
+
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
@@ -63,13 +71,11 @@ export function RadialGlow() {
     let rafId = 0;
 
     const onMove = (e: PointerEvent) => {
-      // Map cursor position into a -1..1 range from viewport center
       targetX = (e.clientX / window.innerWidth - 0.5) * 2;
       targetY = (e.clientY / window.innerHeight - 0.5) * 2;
     };
 
     const tick = () => {
-      // Damped follow — translate up to ~5% of viewport based on cursor
       currentX += (targetX - currentX) * 0.06;
       currentY += (targetY - currentY) * 0.06;
       halo.style.transform = `translate3d(${currentX * 5}vw, ${currentY * 5}vh, 0)`;

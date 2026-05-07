@@ -292,3 +292,15 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Mobile / small viewport optimisations — heavy blurs are battery-expensive,
+   the visual difference between blur(110px) and blur(60px) on a small screen
+   is nil, and the saved GPU cycles are noticeable on older devices. */
+@media (max-width: 1023px) {
+  .glow-breathe {
+    /* Cap the largest blur at a softer value on small screens. */
+    filter: blur(60px) !important;
+    /* Slow the breathe loop slightly to reduce repaints. */
+    animation-duration: 24s;
+  }
+}

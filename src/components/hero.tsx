@@ -72,18 +72,15 @@ export function Hero() {
       aria-label="Introduction"
       className="relative isolate min-h-[100svh] overflow-hidden"
     >
-      {/* Spline canvas — absolutely positioned on desktop, dominates the
-          right portion. Stacks below the text on mobile. */}
+      {/* Spline canvas — desktop only.
+          Hidden on mobile entirely: the runtime is heavy, mobile devices
+          struggle, and the text-only mobile layout reads better. The
+          `hidden lg:block` keeps the DOM out of the mobile tree, and
+          HeroSpline also bails its init below the lg breakpoint as a
+          belt-and-braces guard. */}
       <div
         ref={splineWrapRef}
-        className={[
-          "z-0",
-          // mobile: full width, fixed height below text
-          "relative h-[58vh] min-h-[420px] w-full",
-          // desktop: absolute fill of the right column
-          "lg:absolute lg:inset-y-0 lg:right-[-4%] lg:left-[44%] lg:h-auto lg:min-h-0 lg:w-auto",
-          "xl:left-[48%]",
-        ].join(" ")}
+        className="z-0 hidden lg:absolute lg:inset-y-0 lg:right-[-4%] lg:left-[44%] lg:block xl:left-[48%]"
       >
         <HeroSpline />
       </div>
@@ -92,7 +89,7 @@ export function Hero() {
           within its own container so it doesn't feel hard-pinned to the left
           edge. Sits in the left ~38% on desktop, full-width above the robot
           on mobile. */}
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col items-center justify-start px-5 pt-24 text-center sm:px-8 sm:pt-28 lg:items-start lg:justify-center lg:pt-0 lg:text-left">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col items-center justify-center px-5 pt-24 text-center sm:px-8 sm:pt-28 lg:items-start lg:pt-0 lg:text-left">
         <div className="flex w-full max-w-[44rem] flex-col items-center text-center lg:max-w-[44rem] lg:items-start lg:text-left">
           {/* Status pill */}
           <motion.div {...FADE_UP(0.05, reduce ?? null)}>

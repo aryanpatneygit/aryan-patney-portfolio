@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Working folders that aren't part of the deployed site
+/about/
+/thumbnails/
+/images_*/
+work.txt
+work_specs.txt
+.claude/
+tsconfig.tsbuildinfo
