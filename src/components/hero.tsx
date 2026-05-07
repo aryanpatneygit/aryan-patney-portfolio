@@ -80,7 +80,7 @@ export function Hero() {
           belt-and-braces guard. */}
       <div
         ref={splineWrapRef}
-        className="z-0 hidden lg:absolute lg:inset-y-0 lg:right-[-4%] lg:left-[44%] lg:block xl:left-[48%]"
+        className="z-0 hidden lg:absolute lg:inset-y-0 lg:right-[-14%] lg:left-[40%] lg:block xl:left-[44%] xl:right-[-12%]"
       >
         <HeroSpline />
       </div>

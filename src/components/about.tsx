@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownToLine } from "lucide-react";
 import { site } from "@/data/site";
 import { SectionHeading } from "@/components/section-heading";
+import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
 
 export function About() {
   return (
@@ -70,12 +70,28 @@ export function About() {
             aria-label="Photograph of Aryan Patney"
           >
             {site.photo ? (
-              <Image
+              <PixelatedCanvas
                 src={site.photo}
-                alt={`${site.name} — portrait`}
-                fill
-                sizes="(min-width: 1024px) 33vw, 100vw"
-                className="object-cover"
+                width={520}
+                height={650}
+                cellSize={4}
+                dotScale={0.85}
+                shape="square"
+                backgroundColor="rgb(9, 8, 14)"
+                tintColor="#B59BFF" /* site accent */
+                tintStrength={0.12}
+                dropoutStrength={0.32}
+                interactive
+                distortionStrength={3}
+                distortionRadius={70}
+                distortionMode="swirl"
+                followSpeed={0.18}
+                jitterStrength={3}
+                jitterSpeed={3}
+                fadeOnLeave
+                fadeSpeed={0.1}
+                responsive
+                className="absolute inset-0 h-full w-full"
               />
             ) : (
               <PhotoPlaceholder />
