@@ -33,7 +33,7 @@ export function Contact() {
             <motion.span
               whileHover={reduce ? undefined : { y: -2 }}
               transition={{ type: "spring", stiffness: 240, damping: 22 }}
-              className="block text-display-lg text-fg/95 transition-colors duration-300 group-hover:text-accent"
+              className="block break-all text-[clamp(1.4rem,5vw,4rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-fg/95 transition-colors duration-300 group-hover:text-accent"
             >
               {site.email}
             </motion.span>

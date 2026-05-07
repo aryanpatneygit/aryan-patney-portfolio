@@ -80,7 +80,12 @@ export const CometCard = ({
 
   return (
     <div
-      className={cn(className)}
+      className={cn(
+        // `relative` + `hover:z-30` lifts the hovered card above its grid
+        // siblings so the tilt + glare aren't clipped by the next card.
+        "relative z-0 hover:z-30",
+        className
+      )}
       style={{ perspective: "1500px", transformStyle: "preserve-3d" }}
     >
       <motion.div
