@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { projects, type CaseStudyImage } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import { CaseStudyVideo } from "@/components/case-study-video";
 
 interface PageProps {
   params: { slug: string };
@@ -124,8 +125,22 @@ export default function CaseStudyPage({ params }: PageProps) {
           ) : null}
         </div>
 
-        {/* Hero image */}
-        {project.thumbnail ? (
+        {/* Hero — video takes priority over thumbnail when both exist.
+            Autoplays muted (browsers require it); user can unmute via the
+            small glass toggle in the lower-right of the player. */}
+        {cs?.heroVideo ? (
+          <div
+            data-reveal="scale"
+            data-reveal-delay="0.15"
+            className="glass relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-xl"
+          >
+            <CaseStudyVideo
+              src={cs.heroVideo}
+              poster={project.thumbnail}
+              alt={`${project.title} — video`}
+            />
+          </div>
+        ) : project.thumbnail ? (
           <div
             data-reveal="scale"
             data-reveal-delay="0.15"
@@ -282,9 +297,11 @@ function ProcessSection({
             className={cn(
               "mt-8 grid gap-5",
               isScreens
-                ? step.images.length === 2
-                  ? "mx-auto max-w-2xl grid-cols-1 sm:grid-cols-2"
-                  : "grid-cols-1 sm:grid-cols-3"
+                ? step.images.length === 1
+                  ? "mx-auto max-w-xs grid-cols-1"
+                  : step.images.length === 2
+                    ? "mx-auto max-w-2xl grid-cols-1 sm:grid-cols-2"
+                    : "grid-cols-1 sm:grid-cols-3"
                 : "grid-cols-1 md:grid-cols-2"
             )}
           >

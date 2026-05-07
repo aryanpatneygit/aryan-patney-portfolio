@@ -15,40 +15,56 @@ export function SelectedWork() {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             title="Work."
-            description="Four pieces below — the full archive lives on the work page."
+            description="A selection below — the full archive lives on the work page."
             className="md:max-w-[58ch]"
           />
-          <Link
-            href="/work"
-            className="group hidden shrink-0 items-center gap-2 self-start rounded-pill border border-fg/15 bg-fg/[0.03] px-4 py-2 text-sm text-fg/85 backdrop-blur-md transition-all duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-accent/35 hover:text-fg md:inline-flex"
-          >
-            View all work
-            <ArrowRight
-              size={14}
-              strokeWidth={1.75}
-              className="transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5"
-            />
-          </Link>
+          <ViewAllCTA className="hidden md:inline-flex" />
         </div>
 
         <div className="mt-12">
           <WorkGrid projects={featuredProjects} />
         </div>
 
-        <div className="mt-10 flex justify-center md:hidden">
-          <Link
-            href="/work"
-            className="group inline-flex items-center gap-2 rounded-pill border border-fg/15 bg-fg/[0.03] px-5 py-2.5 text-sm text-fg/85 backdrop-blur-md transition-all duration-300 ease-out-expo hover:border-accent/35 hover:text-fg"
-          >
-            View all work
-            <ArrowRight
-              size={14}
-              strokeWidth={1.75}
-              className="transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5"
-            />
-          </Link>
+        <div className="mt-12 flex justify-center md:mt-16">
+          <ViewAllCTA className="md:hidden" />
+          <ViewAllCTA className="hidden md:inline-flex" prominent />
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * The "View all work" call-to-action.
+ *
+ * Two visual modes:
+ *  • default   — used at the top-right of the section header
+ *  • prominent — used below the grid; bigger, accent-bordered, violet
+ *                glow on hover. The bigger one is what the user actually
+ *                completes their scroll on, so it earns the weight.
+ */
+function ViewAllCTA({
+  className = "",
+  prominent = false,
+}: {
+  className?: string;
+  prominent?: boolean;
+}) {
+  return (
+    <Link
+      href="/work"
+      className={
+        prominent
+          ? `group ${className} items-center gap-2 rounded-pill border border-accent/45 bg-accent/[0.08] px-7 py-3.5 text-base font-semibold text-fg backdrop-blur-md transition-all duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-accent/80 hover:bg-accent/[0.16] hover:shadow-accent-glow`
+          : `group ${className} items-center gap-2 rounded-pill border border-fg/15 bg-fg/[0.03] px-4 py-2 text-sm text-fg/85 backdrop-blur-md transition-all duration-300 ease-out-expo hover:-translate-y-0.5 hover:border-accent/35 hover:text-fg`
+      }
+    >
+      View all work
+      <ArrowRight
+        size={prominent ? 16 : 14}
+        strokeWidth={1.75}
+        className="transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5"
+      />
+    </Link>
   );
 }

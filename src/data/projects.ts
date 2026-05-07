@@ -45,6 +45,14 @@ export interface CaseStudy {
   reflection?: string;
   /** Final image gallery shown after the process sections. */
   gallery?: CaseStudyImage[];
+  /**
+   * Optional hero video. When set, the case study renders an autoplaying,
+   * looping, muted, playsInline video in place of the hero image. The path
+   * should resolve under /public (e.g. "/projects/foo/hero.mp4").
+   * `autoplay + muted + playsInline` are required by browsers for the
+   * "plays on page open" behaviour without user gesture.
+   */
+  heroVideo?: string;
 }
 
 export interface Project {
@@ -367,6 +375,7 @@ export const projects: Project[] = [
       "Dissertation on Pepperfry's mobile app: 30 documented heuristic violations, an 85-screen Figma redesign that fixes every one, and a working ARKit prototype that lets users preview furniture in their actual room before they buy.",
     thumbnail: "/projects/pepperfry-ar-heuristics/cover.png",
     hint: "violet",
+    featured: true,
     caseStudy: {
       tldr: "Graduation dissertation: a heuristic-driven redesign of Pepperfry's mobile app from audit to AR prototype. 30 violations. 180+ screens. One working ARKit build.",
       role: "Graduation project, FLAME University",
@@ -596,6 +605,7 @@ export const projects: Project[] = [
     year: "2026",
     blurb:
       "Mixed-methods study on Zomato cart conversion — qualitative insights, pilot surveys, interviews, A/B testing, statistical validation — converging on a redesign brief grounded in evidence.",
+    thumbnail: "/projects/zomato-cart-abandonment/cover.png",
     hint: "pink",
     caseStudy: {
       tldr: "Data-driven design study on Zomato cart abandonment — full pipeline from problem statement to A/B test to statistical validation.",
@@ -744,6 +754,155 @@ export const projects: Project[] = [
         "First-print prototypes of all three pieces, validated with users and therapists. Modular system designed to be wearable as a set or piece-by-piece.",
       reflection:
         "Production-grade material exploration is the next step — silicone for the pendant, a metal core for the bracelet — to take this past 3D-printed prototypes into something a parent could actually buy.",
+    },
+  },
+  {
+    slug: "digital-animation-final",
+    title: "An Animated Short — Digital Animation Final",
+    tags: ["Design"],
+    year: "2025",
+    blurb:
+      "A short animated piece built frame-by-frame in After Effects. Stock illustrations from Freepik, every asset rigged and animated individually, in the spirit of the Have a Good Trip title sequence.",
+    thumbnail: "/projects/digital-animation-final/cover.png",
+    hint: "violet",
+    featured: true,
+    caseStudy: {
+      tldr: "A short animated piece in the spirit of the Have a Good Trip title sequence — every asset rigged and animated individually in After Effects.",
+      role: "Final project, DESG309 — Digital Animation",
+      timeline: "1 week",
+      stack: ["Adobe After Effects", "Adobe Illustrator", "Freepik stock"],
+      heroVideo: "/projects/digital-animation-final/hero.mp4",
+      process: [
+        {
+          label: "01 · Reference",
+          title: "Studying the Have a Good Trip title sequence.",
+          body: "The brief was open: produce a short animated piece in a week. I anchored on the title sequence of Netflix's Have a Good Trip — quick cuts, characters built from flat geometric shapes, props that morph mid-frame, a soundtrack that drives the timing. The point of the reference wasn't to copy the look but to study the cadence: what makes those few seconds feel alive is that every element is doing something, and the something is timed to a beat.",
+        },
+        {
+          label: "02 · Asset prep",
+          title: "Sourcing and re-rigging from Freepik.",
+          body: "I pulled illustrations from Freepik that fit the visual register I was after, then opened each one in Illustrator and broke it apart — splitting limbs, wheels, eyes, mouths, props onto their own layers. Without that rigging step, an After Effects import is just a flat PNG you can scale and rotate. With it, every joint is animatable. This was most of the work — the animation comes second.",
+        },
+        {
+          label: "03 · Animation",
+          title: "After Effects, frame by frame.",
+          body: "Each layer got its own anchor point, its own keyframes. Walks were cycled, props rotated, faces changed expression on accents. I treated the timeline like a piece of music — every change had to land on a beat or the whole thing felt limp. Spent half the week on rigging and source prep, half on animation and timing.",
+        },
+      ],
+      outcome:
+        "A finished short animated piece, delivered to brief in one week.",
+    },
+  },
+  {
+    slug: "walkrs",
+    title: "Walkrs — For Your Best Friend",
+    tags: ["Design"],
+    year: "2024",
+    blurb:
+      "A concept marketplace for dog owners — hire walkers, book vet visits and grooming, browse food and toys, all in one place. Designed end-to-end in Figma after research with real owners.",
+    thumbnail: "/projects/walkrs/cover.png",
+    hint: "teal",
+    caseStudy: {
+      tldr: "A concept marketplace for dog owners — walkers, vets, grooming, food and toys — designed end-to-end in Figma off the back of owner research.",
+      role: "UI/UX project",
+      timeline: "1 week",
+      stack: ["Figma", "User interviews", "Competitor analysis"],
+      process: [
+        {
+          label: "01 · Discovery",
+          title: "Eight conversations with dog owners.",
+          body: "I started with interviews — eight dog owners, mix of first-timers and people on their second or third dog. The same complaints kept surfacing: finding a trustworthy walker is a WhatsApp lottery, vet appointments mean three phone calls and a calendar guess, and ordering food is split across half a dozen apps. The opportunity wasn't a single feature — it was the consolidation. One place where the recurring stuff actually lives.",
+        },
+        {
+          label: "02 · Discovery surface",
+          title: "Home and search — one entry point.",
+          body: "The product opens with a single discovery surface that holds every service track behind one search. Owners told me they didn't want to remember which app handled which thing — they wanted to type 'vet near me' or 'walker for tomorrow' and have the system route them. The home screen surfaces what's happening with their dog now; search opens up the full marketplace when they're shopping.",
+          imageGrid: "screens",
+          images: [
+            {
+              src: "/projects/walkrs/home.png",
+              alt: "Walkrs home screen",
+              caption: "Home — what's happening for your dog right now.",
+              layout: "screen",
+            },
+            {
+              src: "/projects/walkrs/search.png",
+              alt: "Walkrs search and discovery",
+              caption: "Search — one query, all four service tracks.",
+              layout: "screen",
+            },
+          ],
+        },
+        {
+          label: "03 · Three service tracks",
+          title: "Grooming, medical, and product — same skeleton.",
+          body: "Beyond walking, the marketplace covers three more tracks: grooming, medical (vet care), and product (food + toys). Each gets its own destination but shares the same browse → detail → book → confirm skeleton — a single component library means the booking experience reads identically wherever the user lands. Only the inputs change: medical asks for symptoms and history, grooming for breed and coat, product for size and dietary needs.",
+          imageGrid: "screens",
+          images: [
+            {
+              src: "/projects/walkrs/grooming.png",
+              alt: "Walkrs grooming booking screen",
+              caption: "Grooming — book by breed, coat type, and location.",
+              layout: "screen",
+            },
+            {
+              src: "/projects/walkrs/medical.png",
+              alt: "Walkrs medical / vet booking screen",
+              caption: "Medical — vet appointments, with history pulled from past bookings.",
+              layout: "screen",
+            },
+            {
+              src: "/projects/walkrs/toys-and-supplies.png",
+              alt: "Walkrs toys and supplies storefront",
+              caption: "Toys & Supplies — food and toys recommended by dog age and breed.",
+              layout: "screen",
+            },
+          ],
+        },
+        {
+          label: "04 · Specialist profiles",
+          title: "Same shape, different specialist.",
+          body: "Every specialist — walker, doctor, groomer — gets the same profile structure: credentials, reviews, availability, services, price. The shape is identical so the user's mental model carries between tracks. Once you've booked a walker, booking a vet feels familiar.",
+          imageGrid: "screens",
+          images: [
+            {
+              src: "/projects/walkrs/walker-profile.png",
+              alt: "Walker profile screen",
+              caption: "Walker — credentials, availability, price per walk.",
+              layout: "screen",
+            },
+            {
+              src: "/projects/walkrs/doctor-profile.png",
+              alt: "Doctor / vet profile screen",
+              caption: "Doctor — same shape; specialty, clinic, consult fee.",
+              layout: "screen",
+            },
+            {
+              src: "/projects/walkrs/groomer-profile.png",
+              alt: "Groomer profile screen",
+              caption: "Groomer — services, before/after gallery, slot availability.",
+              layout: "screen",
+            },
+          ],
+        },
+        {
+          label: "05 · The dog as the unit",
+          title: "Owner accounts, dog profiles.",
+          body: "The core architecture decision: an account is for a person, but the unit of action is a dog. Most owners I spoke to had more than one — different ages, different needs, different vets. Profiles cascade: Owner → one or many Dogs → bookings, medical history, and recommendations per dog. Every booking flow opens with 'which dog is this for?' and inherits the dog's profile downstream — vets see allergies, groomers see coat, the food shop sees age and weight.",
+          imageGrid: "screens",
+          images: [
+            {
+              src: "/projects/walkrs/profile.png",
+              alt: "Owner profile with dogs nested below",
+              caption:
+                "Owner profile — accounts hold one or more dog profiles; bookings and history live under each dog.",
+              layout: "screen",
+            },
+          ],
+        },
+      ],
+      outcome:
+        "A complete prototype covering all four service tracks, three specialist profile templates, and the owner/dog profile system that knits the architecture together.",
     },
   },
   {

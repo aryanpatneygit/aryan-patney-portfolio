@@ -43,3 +43,6 @@ work.txt
 work_specs.txt
 .claude/
 tsconfig.tsbuildinfo
+/animation/
+/Zomato/
+/zomato/
