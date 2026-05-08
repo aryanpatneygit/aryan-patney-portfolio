@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   description:
     "Aryan Patney is a Design Engineer working at the intersection of code and craft, building considered, technical, human-centred products.",
   metadataBase: new URL("https://aryanpatney.com"),
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
   openGraph: {
     title: "Aryan Patney | Design Engineer",
     description:
