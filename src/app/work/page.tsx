@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { WorkGrid } from "@/components/work-grid";
 
 export const metadata: Metadata = {
-  title: "Work · Aryan Patney",
+  title: "Work | Aryan Patney",
   description:
     "Selected projects spanning design engineering, HCI research, and product design.",
 };

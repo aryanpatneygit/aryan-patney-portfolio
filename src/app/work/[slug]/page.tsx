@@ -19,7 +19,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const project = projects.find((p) => p.slug === params.slug);
   if (!project) return { title: "Not found" };
   return {
-    title: `${project.title} · Aryan Patney`,
+    title: `${project.title} | Aryan Patney`,
     description: project.blurb,
   };
 }

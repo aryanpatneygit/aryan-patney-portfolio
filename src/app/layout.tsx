@@ -14,12 +14,12 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "Aryan Patney · Design Engineer",
+  title: "Aryan Patney | Design Engineer",
   description:
     "Aryan Patney is a Design Engineer working at the intersection of code and craft, building considered, technical, human-centred products.",
   metadataBase: new URL("https://aryanpatney.com"),
   openGraph: {
-    title: "Aryan Patney · Design Engineer",
+    title: "Aryan Patney | Design Engineer",
     description:
       "Selected work in design, code, and research from Aryan Patney.",
     type: "website",
