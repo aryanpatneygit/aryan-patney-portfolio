@@ -80,10 +80,16 @@ export function About() {
                 cellSize={4}
                 dotScale={0.85}
                 shape="square"
-                backgroundColor="rgb(9, 8, 14)"
+                /* Matches the photo's navy backdrop so any sparse dots in
+                   the background regions read as part of the photo's bg,
+                   not as the page bg leaking through. */
+                backgroundColor="rgb(28, 36, 56)"
                 tintColor="#B59BFF" /* site accent */
                 tintStrength={0.12}
-                dropoutStrength={0.32}
+                /* Very low dropout — the original bg had a slight gradient
+                   which made 0.32 fire unevenly across left vs right and
+                   read as asymmetric "empty space". */
+                dropoutStrength={0.08}
                 interactive
                 distortionStrength={3}
                 distortionRadius={70}
