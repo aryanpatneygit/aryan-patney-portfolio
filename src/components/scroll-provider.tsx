@@ -108,6 +108,12 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
             duration: prefersReduced ? 0.25 : flyIn ? 1.2 : 0.95,
             ease: "expo.out",
             stagger: parseFloat(group.dataset.stagger ?? "0.08"),
+            // GSAP leaves the inline transform set after the animation
+            // completes (matrix identity). That keeps a stacking context on
+            // each card's wrapper, which then traps CometCard's hover:z-30
+            // and lets the right card clip the left card on hover. Clearing
+            // transform once the animation finishes releases the context.
+            clearProps: "transform",
             scrollTrigger: {
               trigger: group,
               start: "top 90%",

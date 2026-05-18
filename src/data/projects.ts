@@ -191,11 +191,13 @@ export const projects: Project[] = [
               alt: "An info card hovering near a planet",
               caption:
                 "Information surfaces on approach, diegetic, never anchored to the head.",
+              layout: "wide",
             },
             {
               src: "/projects/echoes-of-the-cosmos/quest3-photo.png",
               alt: "Photo of the Meta Quest 3 headset used to test the build",
               caption: "Validated on Meta Quest 3, Quest-native build via Meta XR SDK.",
+              layout: "wide",
             },
           ],
         },
