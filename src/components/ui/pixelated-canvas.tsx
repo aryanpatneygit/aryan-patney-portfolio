@@ -41,6 +41,12 @@ type PixelatedCanvasProps = {
   maxFps?: number;
   /** Object-fit behavior for the source image within the canvas. */
   objectFit?: "cover" | "contain" | "fill" | "none";
+  /**
+   * Vertical anchor (0..1) for the source image inside the canvas when the
+   * aspect ratios don't match. 0 = top, 0.5 = centre (default), 1 = bottom.
+   * Mirrors CSS `object-position`'s Y component.
+   */
+  objectPositionY?: number;
   /** Random motion amplitude for dots near the pointer. */
   jitterStrength?: number;
   /** Speed factor for the random motion. */
@@ -73,6 +79,7 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
   tintStrength = 0.2,
   maxFps = 60,
   objectFit = "cover",
+  objectPositionY = 0.5,
   jitterStrength = 4,
   jitterSpeed = 4,
   fadeOnLeave = true,
@@ -161,13 +168,13 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
         dw = Math.ceil(iw * scale);
         dh = Math.ceil(ih * scale);
         dx = Math.floor((displayWidth - dw) / 2);
-        dy = Math.floor((displayHeight - dh) / 2);
+        dy = Math.floor((displayHeight - dh) * objectPositionY);
       } else if (objectFit === "contain") {
         const scale = Math.min(displayWidth / iw, displayHeight / ih);
         dw = Math.ceil(iw * scale);
         dh = Math.ceil(ih * scale);
         dx = Math.floor((displayWidth - dw) / 2);
-        dy = Math.floor((displayHeight - dh) / 2);
+        dy = Math.floor((displayHeight - dh) * objectPositionY);
       } else if (objectFit === "fill") {
         dw = displayWidth;
         dh = displayHeight;
@@ -175,7 +182,7 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
         dw = iw;
         dh = ih;
         dx = Math.floor((displayWidth - dw) / 2);
-        dy = Math.floor((displayHeight - dh) / 2);
+        dy = Math.floor((displayHeight - dh) * objectPositionY);
       }
       off.drawImage(img, dx, dy, dw, dh);
 
@@ -545,6 +552,7 @@ export const PixelatedCanvas: React.FC<PixelatedCanvasProps> = ({
     tintStrength,
     maxFps,
     objectFit,
+    objectPositionY,
     jitterStrength,
     jitterSpeed,
     fadeOnLeave,
