@@ -66,14 +66,17 @@ export function About() {
         <div className="flex justify-center lg:col-span-5 lg:items-center">
           <div
             data-reveal="scale"
-            className="glass relative aspect-[4/5] w-full overflow-hidden rounded-xl"
+            /* Container aspect matches the actual photo (1696 × 2466 ≈
+               848 / 1233). Keeping them in lockstep means the image fits
+               edge-to-edge with no letterbox bars + no crop. */
+            className="glass relative aspect-[848/1233] w-full overflow-hidden rounded-xl"
             aria-label="Photograph of Aryan Patney"
           >
             {site.photo ? (
               <PixelatedCanvas
                 src={site.photo}
                 width={520}
-                height={650}
+                height={756}
                 cellSize={4}
                 dotScale={0.85}
                 shape="square"
@@ -91,11 +94,7 @@ export function About() {
                 fadeOnLeave
                 fadeSpeed={0.1}
                 responsive
-                /* `contain` = whole image fits inside the frame, no crop.
-                   Since the container + source are both 4:5 this behaves
-                   identically to `cover` (full bleed) — just guarantees the
-                   image is never cropped if the source aspect drifts. */
-                objectFit="contain"
+                objectFit="cover"
                 className="absolute inset-0 h-full w-full"
               />
             ) : (
