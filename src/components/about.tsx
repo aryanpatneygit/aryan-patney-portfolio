@@ -63,10 +63,10 @@ export function About() {
           </div>
         </div>
 
-        <div className="lg:col-span-5">
+        <div className="flex justify-center lg:col-span-5 lg:items-center">
           <div
             data-reveal="scale"
-            className="glass relative aspect-[4/5] overflow-hidden rounded-xl"
+            className="glass relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-xl"
             aria-label="Photograph of Aryan Patney"
           >
             {site.photo ? (
