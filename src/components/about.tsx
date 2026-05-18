@@ -66,14 +66,14 @@ export function About() {
         <div className="flex justify-center lg:col-span-5 lg:items-center">
           <div
             data-reveal="scale"
-            className="glass relative aspect-square w-full overflow-hidden rounded-xl"
+            className="glass relative aspect-[4/5] w-full overflow-hidden rounded-xl"
             aria-label="Photograph of Aryan Patney"
           >
             {site.photo ? (
               <PixelatedCanvas
                 src={site.photo}
-                width={560}
-                height={560}
+                width={520}
+                height={650}
                 cellSize={4}
                 dotScale={0.85}
                 shape="square"
@@ -91,13 +91,11 @@ export function About() {
                 fadeOnLeave
                 fadeSpeed={0.1}
                 responsive
-                objectFit="cover"
-                /* Source photo (4:5) is taller than this square container,
-                   so `cover` crops the top + bottom. Anchor near the top of
-                   the source (0.15 = trim 15% of excess from top, 85% from
-                   bottom) so the face lands at the visual centre of the
-                   square instead of in the upper third. */
-                objectPositionY={0.15}
+                /* `contain` = whole image fits inside the frame, no crop.
+                   Since the container + source are both 4:5 this behaves
+                   identically to `cover` (full bleed) — just guarantees the
+                   image is never cropped if the source aspect drifts. */
+                objectFit="contain"
                 className="absolute inset-0 h-full w-full"
               />
             ) : (
