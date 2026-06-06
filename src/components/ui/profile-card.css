@@ -491,7 +491,9 @@
   }
   .pc-details p {
     font-size: 12px;
-    top: -8px;
+    /* moderate gap, consistent with desktop (was -8px, which crammed the
+       title against the name on phones). */
+    top: 3px;
   }
   .pc-user-info {
     --ui-inset: 12px;
@@ -514,5 +516,15 @@
     padding: 5px 10px;
     font-size: 10px;
     border-radius: 50px;
+  }
+}
+
+/* Touch / no-hover devices: the base rule sets touch-action: none for the
+   tilt, which blocks page scrolling when a finger lands on the card. Restore
+   normal touch behaviour so the page scrolls. The JS also skips binding the
+   tilt handlers on these devices, so the card renders static. */
+@media (hover: none), (pointer: coarse) {
+  .pc-card-wrapper {
+    touch-action: auto;
   }
 }

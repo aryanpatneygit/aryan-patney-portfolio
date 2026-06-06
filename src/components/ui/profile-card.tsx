@@ -295,6 +295,16 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     const shell = shellRef.current;
     if (!shell) return;
 
+    // The pointer tilt is a hover effect. On touch devices it does more harm
+    // than good: it hijacks scroll, tilts on tap and never settles, and the
+    // device has no cursor to track. Skip it entirely on non-fine pointers so
+    // the card renders static and the page scrolls normally. (CSS also resets
+    // touch-action to auto on these devices.)
+    const finePointer =
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!finePointer) return;
+
     const pointerMoveHandler = handlePointerMove as EventListener;
     const pointerEnterHandler = handlePointerEnter as EventListener;
     const pointerLeaveHandler = handlePointerLeave as EventListener;
