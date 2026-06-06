@@ -73,13 +73,13 @@ export function About() {
             handle="aryanpatney"
             status="Available"
             contactText="Get in touch"
-            avatarUrl={site.photo}
-            showUserInfo
+            avatarUrl="/avatar-cutout.png"
+            showUserInfo={false}
             enableTilt
             enableMobileTilt={false}
             behindGlowEnabled
-            behindGlowColor="rgba(181, 155, 255, 0.55)"
-            innerGradient="linear-gradient(145deg, #60496e8c 0%, #71C4FF44 100%)"
+            behindGlowColor="rgba(125, 190, 255, 0.67)"
+            innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
             onContactClick={() => {
               window.location.href = `mailto:${site.email}`;
             }}
