@@ -262,8 +262,13 @@
   position: absolute;
   left: 50%;
   transform-origin: 50% 100%;
+  /* The base scale(1.22) fills the card: this avatar is a landscape (head +
+     shoulders) cutout, not a tall portrait, so it needs scaling up to sit
+     just under the title with the shoulders reaching the card edges. Origin
+     is bottom-centre so it grows upward and stays anchored at the base. */
   transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px))
-    translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02))
+    translateZ(0) scale(1.22)
+    scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02))
     scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
   bottom: -1px;
   backface-visibility: hidden;

@@ -74,6 +74,7 @@ export function About() {
             status="Available"
             contactText="Get in touch"
             avatarUrl="/avatar-cutout.png"
+            iconUrl="/icon-pattern.svg"
             showUserInfo={false}
             enableTilt
             enableMobileTilt={false}

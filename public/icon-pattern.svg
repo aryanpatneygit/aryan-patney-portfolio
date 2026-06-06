@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#000"/>
+  <g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- </> -->
+    <path d="M40 46 l-14 14 l14 14"/>
+    <path d="M70 46 l14 14 l-14 14"/>
+    <path d="M52 42 l6 36"/>
+    <!-- => -->
+    <path d="M196 56 h26"/>
+    <path d="M212 46 l12 10 l-12 10"/>
+    <!-- { } -->
+    <path d="M44 150 q-9 0 -9 11 q0 8 -7 9 q7 1 7 9 q0 11 9 11"/>
+    <path d="M78 150 q9 0 9 11 q0 8 7 9 q-7 1 -7 9 q0 11 -9 11"/>
+    <!-- // -->
+    <path d="M150 158 l11 -22"/>
+    <path d="M166 158 l11 -22"/>
+    <!-- <> -->
+    <path d="M226 152 l-14 14 l14 14"/>
+    <path d="M256 152 l14 14 l-14 14"/>
+    <!-- ; -->
+    <circle cx="120" cy="244" r="4" fill="#fff" stroke="none"/>
+    <path d="M120 256 q0 10 -6 16"/>
+    <!-- [] -->
+    <path d="M196 234 h-14 v36 h14"/>
+    <path d="M236 234 h14 v36 h-14"/>
+    <!-- () -->
+    <path d="M44 238 q-12 16 0 32"/>
+    <path d="M74 238 q12 16 0 32"/>
+  </g>
+</svg>
