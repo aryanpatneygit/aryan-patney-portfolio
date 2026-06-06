@@ -267,7 +267,7 @@
      just under the title with the shoulders reaching the card edges. Origin
      is bottom-centre so it grows upward and stays anchored at the base. */
   transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px))
-    translateZ(0) scale(1.45)
+    translateZ(0) scale(1.36)
     scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02))
     scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
   bottom: -1px;
@@ -403,9 +403,9 @@
 .pc-details p {
   font-weight: 600;
   position: relative;
-  /* was -12px; relaxed so the title sits clearly below the name with a
-     visible gap (our display font's tighter metrics needed this). */
-  top: 8px;
+  /* Moderate gap under the name: clears the name without pushing the title
+     down into the avatar's hair. */
+  top: 5px;
   white-space: nowrap;
   font-size: 16px;
   margin: 0 auto;
