@@ -295,73 +295,85 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     const shell = shellRef.current;
     if (!shell) return;
 
-    // The pointer tilt is a hover effect. On touch devices it does more harm
-    // than good: it hijacks scroll, tilts on tap and never settles, and the
-    // device has no cursor to track. Skip it entirely on non-fine pointers so
-    // the card renders static and the page scrolls normally. (CSS also resets
-    // touch-action to auto on these devices.)
+    const deviceOrientationHandler =
+      handleDeviceOrientation as EventListener;
+    const cleanups: Array<() => void> = [];
+
+    // Devices with a real cursor (desktop) drive the tilt with the pointer.
+    // Touch devices have no cursor and pointer-tilt hijacks scroll + tilts on
+    // tap, so they instead use the gyroscope (enableMobileTilt) — tilt the
+    // phone and the card responds the same way the mouse does on desktop.
     const finePointer =
       typeof window !== "undefined" &&
       window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!finePointer) return;
 
-    const pointerMoveHandler = handlePointerMove as EventListener;
-    const pointerEnterHandler = handlePointerEnter as EventListener;
-    const pointerLeaveHandler = handlePointerLeave as EventListener;
-    const deviceOrientationHandler =
-      handleDeviceOrientation as EventListener;
+    if (finePointer) {
+      const pointerMoveHandler = handlePointerMove as EventListener;
+      const pointerEnterHandler = handlePointerEnter as EventListener;
+      const pointerLeaveHandler = handlePointerLeave as EventListener;
 
-    shell.addEventListener("pointerenter", pointerEnterHandler);
-    shell.addEventListener("pointermove", pointerMoveHandler);
-    shell.addEventListener("pointerleave", pointerLeaveHandler);
+      shell.addEventListener("pointerenter", pointerEnterHandler);
+      shell.addEventListener("pointermove", pointerMoveHandler);
+      shell.addEventListener("pointerleave", pointerLeaveHandler);
+      cleanups.push(() => {
+        shell.removeEventListener("pointerenter", pointerEnterHandler);
+        shell.removeEventListener("pointermove", pointerMoveHandler);
+        shell.removeEventListener("pointerleave", pointerLeaveHandler);
+      });
 
-    const handleClick = () => {
-      if (!enableMobileTilt || location.protocol !== "https:") return;
-      type MotionCtor = typeof DeviceMotionEvent & {
+      const initialX =
+        (shell.clientWidth || 0) - ANIMATION_CONFIG.INITIAL_X_OFFSET;
+      const initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
+      tiltEngine.setImmediate(initialX, initialY);
+      tiltEngine.toCenter();
+      tiltEngine.beginInitial(ANIMATION_CONFIG.INITIAL_DURATION);
+    } else if (enableMobileTilt) {
+      // Gyroscope tilt for touch devices.
+      tiltEngine.toCenter();
+
+      type OrientationCtor = typeof DeviceOrientationEvent & {
         requestPermission?: () => Promise<"granted" | "denied">;
       };
-      const anyMotion = window.DeviceMotionEvent as unknown as MotionCtor;
-      if (anyMotion && typeof anyMotion.requestPermission === "function") {
-        anyMotion
-          .requestPermission()
-          .then((state) => {
-            if (state === "granted") {
-              window.addEventListener(
-                "deviceorientation",
-                deviceOrientationHandler
-              );
-            }
-          })
-          .catch(console.error);
-      } else {
-        window.addEventListener(
-          "deviceorientation",
-          deviceOrientationHandler
-        );
-      }
-    };
-    shell.addEventListener("click", handleClick);
+      const ctor =
+        typeof window !== "undefined"
+          ? (window.DeviceOrientationEvent as unknown as OrientationCtor)
+          : undefined;
+      const needsPermission =
+        !!ctor && typeof ctor.requestPermission === "function";
 
-    const initialX =
-      (shell.clientWidth || 0) - ANIMATION_CONFIG.INITIAL_X_OFFSET;
-    const initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
-    tiltEngine.setImmediate(initialX, initialY);
-    tiltEngine.toCenter();
-    tiltEngine.beginInitial(ANIMATION_CONFIG.INITIAL_DURATION);
+      const bindOrientation = () =>
+        window.addEventListener("deviceorientation", deviceOrientationHandler);
+
+      if (needsPermission) {
+        // iOS: motion access needs a user gesture + HTTPS. Request it on the
+        // first tap, then the gyroscope drives the tilt.
+        const onTap = () => {
+          if (location.protocol !== "https:") return;
+          ctor!
+            .requestPermission!()
+            .then((state) => {
+              if (state === "granted") bindOrientation();
+            })
+            .catch(() => {});
+          shell.removeEventListener("click", onTap);
+        };
+        shell.addEventListener("click", onTap);
+        cleanups.push(() => shell.removeEventListener("click", onTap));
+      } else if (ctor) {
+        // Android / others: bind directly, no permission gate.
+        bindOrientation();
+      }
+      cleanups.push(() =>
+        window.removeEventListener("deviceorientation", deviceOrientationHandler)
+      );
+    }
 
     return () => {
-      shell.removeEventListener("pointerenter", pointerEnterHandler);
-      shell.removeEventListener("pointermove", pointerMoveHandler);
-      shell.removeEventListener("pointerleave", pointerLeaveHandler);
-      shell.removeEventListener("click", handleClick);
-      window.removeEventListener(
-        "deviceorientation",
-        deviceOrientationHandler
-      );
+      cleanups.forEach((fn) => fn());
       if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
       if (leaveRafRef.current) cancelAnimationFrame(leaveRafRef.current);
       tiltEngine.cancel();
-      shell.classList.remove("entering");
+      shell.classList.remove("entering", "active");
     };
   }, [
     enableTilt,

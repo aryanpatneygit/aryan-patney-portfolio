@@ -77,7 +77,7 @@ export function About() {
             iconUrl="/icon-pattern.svg"
             showUserInfo={false}
             enableTilt
-            enableMobileTilt={false}
+            enableMobileTilt
             behindGlowEnabled
             behindGlowColor="rgba(125, 190, 255, 0.67)"
             innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"

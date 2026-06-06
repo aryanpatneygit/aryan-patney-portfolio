@@ -1,5 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
-  <rect width="300" height="300" fill="#000"/>
+  <!-- Transparent background (no black rect): the holographic shine uses this
+       as a mask. Chrome reads it in luminance mode, Safari/iOS in alpha mode;
+       a transparent bg + white glyphs is hidden in BOTH (a black bg is opaque
+       in alpha mode, which let the whole-card shine blow out white on iOS). -->
   <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
     <!-- </> glyph #1 -->
     <g transform="translate(66,58) scale(0.9)">
