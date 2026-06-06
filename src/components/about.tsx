@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowDownToLine } from "lucide-react";
 import { site } from "@/data/site";
 import { SectionHeading } from "@/components/section-heading";
-import { PixelatedCanvas } from "@/components/ui/pixelated-canvas";
+import { ProfileCard } from "@/components/ui/profile-card";
 
 export function About() {
   return (
@@ -63,82 +63,29 @@ export function About() {
           </div>
         </div>
 
-        <div className="flex justify-center lg:col-span-5 lg:items-center">
-          <div
-            data-reveal="scale"
-            /* Container aspect matches the actual photo (1696 × 2466 ≈
-               848 / 1233). Keeping them in lockstep means the image fits
-               edge-to-edge with no letterbox bars + no crop. */
-            className="glass relative aspect-[848/1233] w-full overflow-hidden rounded-xl"
-            aria-label="Photograph of Aryan Patney"
-          >
-            {site.photo ? (
-              <PixelatedCanvas
-                src={site.photo}
-                width={520}
-                height={756}
-                cellSize={4}
-                dotScale={0.85}
-                shape="square"
-                backgroundColor="rgb(9, 8, 14)"
-                tintColor="#B59BFF" /* site accent */
-                tintStrength={0.12}
-                dropoutStrength={0.32}
-                interactive
-                distortionStrength={3}
-                distortionRadius={70}
-                distortionMode="swirl"
-                followSpeed={0.18}
-                jitterStrength={3}
-                jitterSpeed={3}
-                fadeOnLeave
-                fadeSpeed={0.1}
-                responsive
-                objectFit="cover"
-                className="absolute inset-0 h-full w-full"
-              />
-            ) : (
-              <PhotoPlaceholder />
-            )}
-          </div>
+        <div
+          data-reveal="scale"
+          className="flex justify-center lg:col-span-5 lg:items-center"
+        >
+          <ProfileCard
+            name={site.name}
+            title={site.title}
+            handle="aryanpatney"
+            status="Available"
+            contactText="Get in touch"
+            avatarUrl={site.photo}
+            showUserInfo
+            enableTilt
+            enableMobileTilt={false}
+            behindGlowEnabled
+            behindGlowColor="rgba(181, 155, 255, 0.55)"
+            innerGradient="linear-gradient(145deg, #60496e8c 0%, #71C4FF44 100%)"
+            onContactClick={() => {
+              window.location.href = `mailto:${site.email}`;
+            }}
+          />
         </div>
       </div>
     </section>
-  );
-}
-
-function PhotoPlaceholder() {
-  return (
-    <div className="absolute inset-0">
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(135deg, rgb(40 36 56 / 0.6), rgb(20 18 28 / 0.6))",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-30 mix-blend-soft-light"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgb(240 240 248 / 0.4) 1px, transparent 1px)",
-          backgroundSize: "16px 16px",
-          maskImage:
-            "radial-gradient(ellipse at 50% 40%, black 35%, transparent 80%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at 50% 40%, black 35%, transparent 80%)",
-        }}
-      />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center">
-          <div className="accent-em text-6xl">AP</div>
-          <div className="mt-3 label-sm text-fg-subtle">
-            Photograph goes here
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
